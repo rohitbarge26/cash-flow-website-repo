@@ -766,3 +766,62 @@ footer {
   font-size: 0.8rem;
 }
 
+/* Testimonial Circular Slider */
+.testimonial-slider-container {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 1rem 0 2rem 0;
+}
+
+/* Gradient masks for smooth fading at the edges */
+.testimonial-slider-container::before,
+.testimonial-slider-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.testimonial-slider-container::before {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-page) 0%, transparent 100%);
+}
+
+.testimonial-slider-container::after {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-page) 0%, transparent 100%);
+}
+
+.testimonial-slider-track {
+  display: flex;
+  width: max-content;
+  animation: slideTestimonials 40s linear infinite;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+/* Pause animation when user hovers to read */
+.testimonial-slider-track:hover {
+  animation-play-state: paused;
+}
+
+.testimonial-slider-track .card {
+  width: 350px;
+  flex-shrink: 0;
+  white-space: normal;
+  /* Override any previous grid slide up animations so they don't break the flex track */
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+@keyframes slideTestimonials {
+  0% { transform: translateX(0); }
+  /* Translate exactly 50% of the track (which equals the 6 original cards + gaps) */
+  100% { transform: translateX(calc(-50% - 1rem)); }
+}
+
