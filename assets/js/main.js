@@ -44,7 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     console.error(response);
                     if(formResult) {
-                        formResult.innerHTML = "Something went wrong! Please try again later.";
+                        // Display the exact error message from Web3Forms
+                        formResult.innerHTML = jsonResponse.message || "Something went wrong! Please try again later.";
                         formResult.style.color = "red";
                     }
                 }
@@ -52,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => {
                 console.error(error);
                 if(formResult) {
-                    formResult.innerHTML = "An error occurred. Please check your connection.";
+                    formResult.innerHTML = "Network error: " + error.message;
                     formResult.style.color = "red";
                 }
             })
