@@ -293,6 +293,17 @@ footer {
   text-align: left;
 }
 
+.footer-logo {
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.footer-logo img {
+  width: 100%;
+  max-width: 250px; /* 200px to 300px width as per guidelines */
+  height: auto;
+}
+
 .footer-column h3 {
   color: #ffffff;
   font-size: 1.1rem;
