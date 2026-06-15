@@ -81,18 +81,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (marqueeSection && marqueeContent) {
             function getScrollAmount() {
                 let marqueeWidth = marqueeContent.scrollWidth;
-                return -(marqueeWidth - window.innerWidth + (window.innerWidth * 0.1));
+                // Move it fully to the left, stopping when the right edge hits the screen
+                return -(marqueeWidth - window.innerWidth + 100); 
             }
 
             const tween = gsap.to(marqueeContent, {
-                x: getScrollAmount,
+                x: () => getScrollAmount(),
                 ease: "none"
             });
 
             ScrollTrigger.create({
                 trigger: marqueeSection,
                 start: "top top",
-                end: () => `+=${getScrollAmount() * -1}`,
+                // 1 pixel of scroll translates to 1 pixel of movement (can be increased for slower scroll)
+                end: () => `+=${Math.abs(getScrollAmount())}`,
                 pin: true,
                 animation: tween,
                 scrub: 1,
