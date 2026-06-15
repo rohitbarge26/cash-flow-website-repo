@@ -994,7 +994,7 @@ footer {
   width: 100%;
   overflow: hidden;
   position: relative;
-  display: flex;
+  display: block; /* Removed flex so child can overflow naturally */
 }
 .marquee-container::before, .marquee-container::after {
   content: "";
@@ -1016,7 +1016,7 @@ footer {
 .marquee-content {
   display: flex;
   width: max-content;
-  /* Removed CSS animation since GSAP handles it */
+  flex-shrink: 0; /* CRITICAL: prevents logos from squishing into viewport */
   gap: 3rem;
   padding: 0 10vw; /* Start with padding so the first logo comes into view */
   align-items: center;
