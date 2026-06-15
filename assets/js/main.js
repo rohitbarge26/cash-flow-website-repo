@@ -70,4 +70,34 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Initialize GSAP ScrollTrigger for Partner Marquee
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const marqueeSection = document.querySelector('.partner-marquee-section');
+        const marqueeContent = document.querySelector('.marquee-content');
+
+        if (marqueeSection && marqueeContent) {
+            function getScrollAmount() {
+                let marqueeWidth = marqueeContent.scrollWidth;
+                return -(marqueeWidth - window.innerWidth + (window.innerWidth * 0.1));
+            }
+
+            const tween = gsap.to(marqueeContent, {
+                x: getScrollAmount,
+                ease: "none"
+            });
+
+            ScrollTrigger.create({
+                trigger: marqueeSection,
+                start: "top top",
+                end: () => `+=${getScrollAmount() * -1}`,
+                pin: true,
+                animation: tween,
+                scrub: 1,
+                invalidateOnRefresh: true
+            });
+        }
+    }
 });
